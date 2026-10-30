@@ -155,7 +155,7 @@ class InMemoryStorage implements IStorage {
   }
 
   async checkEmailExist(email: string): Promise<boolean> {
-    for (const reg of this.emailRegistrations.values()) {
+    for (const reg of Array.from(this.emailRegistrations.values())) {
       if (reg.email === email) return true;
     }
     return false;
@@ -183,7 +183,7 @@ class InMemoryStorage implements IStorage {
   }
 
   async deleteEmailRegistration(email: string): Promise<void> {
-    for (const [hash, reg] of this.emailRegistrations.entries()) {
+    for (const [hash, reg] of Array.from(this.emailRegistrations.entries())) {
       if (reg.email === email) {
         this.emailRegistrations.delete(hash);
       }
